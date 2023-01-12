@@ -15,6 +15,7 @@ public class Options extends Account{
     public void login(){
         System.out.println("Techproed ATM' hoş geldiniz");
 
+        int counter = 0;
         do {
             data.put(12345,1234);
             data.put(23456,2345);
@@ -48,12 +49,19 @@ public class Options extends Account{
                 }
             }
             if (count == data.size()) {
+                counter++;
                 System.out.println("Yanlış hesap numarası veya pin numarası girdiniz...");
                 System.out.println("Tekrar deneyin ya da çıkmak için q ya basın");
                 String exit = input.next().toLowerCase();
-                if (exit.equals("q")) {
-                    break;
+                if (exit.equalsIgnoreCase("q")) {
+                    flag = false;
                 }
+            }
+
+            if(counter==3){
+                System.out.println("3 kere hatalı bilgi girilmiştir ve hesabınız" +
+                        "dondurulmuştur!!");
+                flag = false;
             }
         }while (flag);
     }
@@ -132,6 +140,8 @@ public class Options extends Account{
                 break;
             case 2:
                 System.out.println("Svaing/Vadeli hesabınızdasınız");
+                savingOperations();
+                break;
             case 3:
                 System.out.println("ATM makinemizi kullandığınız için teşekkür ederiz");
                 flag = false;
